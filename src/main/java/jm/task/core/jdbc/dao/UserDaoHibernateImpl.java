@@ -19,13 +19,12 @@ public class UserDaoHibernateImpl implements UserDao {
 
         try(Session session = Util.getConnectionHibernate().getCurrentSession()) {
             session.beginTransaction();
-            session.createSQLQuery("CREATE TABLE IF NOT EXISTS user (" +
+            session.createSQLQuery("CREATE TABLE IF not exists user (" +
                 " id INTEGER not null AUTO_INCREMENT, " +
                 " name VARCHAR(255), " +
                 " lastName VARCHAR(255), " +
                 " age INTEGER, " +
-                "PRIMARY KEY(id))");
-            session.getTransaction().commit();
+                "PRIMARY KEY(id))").executeUpdate();
         } catch (Exception e){
             e.printStackTrace();
         }
